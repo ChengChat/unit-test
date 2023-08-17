@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:mem:h2test;DB_CLOSE_DELAY=-1
+    schema: classpath*:sql/schema-mysql.sql
+    data: classpath*:sql/schema-data.sql
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    generate-ddl: false
+logging:
+  level:
+    root: info
