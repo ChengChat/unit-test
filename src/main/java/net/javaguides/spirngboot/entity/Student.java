@@ -1,11 +1,14 @@
 package net.javaguides.spirngboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
+import lombok.extern.jackson.Jacksonized;
 
-@Setter
-@Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Jacksonized
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

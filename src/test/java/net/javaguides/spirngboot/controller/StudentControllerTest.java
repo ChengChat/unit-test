@@ -1,6 +1,7 @@
 package net.javaguides.spirngboot.controller;
 
 import static java.util.Collections.singletonList;
+import static net.javaguides.spirngboot.maker.StudentsMaker.buildStudentsMaker;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -12,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.google.common.collect.Lists;
 import net.javaguides.spirngboot.entity.Student;
 import net.javaguides.spirngboot.service.StudentService;
 import net.javaguides.spirngboot.util.JsonUtil;
@@ -39,7 +41,7 @@ class StudentControllerTest {
 
   @Test
   void createStudent() throws Exception {
-    Student student = Student.builder().id(1L).build();
+    Student student = buildStudentsMaker();
     when(studentService.save(any())).thenReturn(student);
 
     mockMvc.perform(post("/api/students")
@@ -51,7 +53,18 @@ class StudentControllerTest {
         .andExpect(jsonPath("$.data.id", is(1)));
   }
 
+
+
   @Test
-  void getAllStudents() {
+  void getAllStudents() throws Exception {
+    Student student = buildStudentsMaker();
+    when(studentService.findAll()).thenReturn(Lists.newArrayList(student));
+
+    mockMvc.perform(get("/api/students")
+            .contentType(APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.code", is(200)))
+        .andExpect(jsonPath("$.data[0].id", is(1)));
   }
 }
