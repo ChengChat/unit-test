@@ -1,0 +1,45 @@
+{
+  "index": {
+    "routing": {
+      "allocation": {
+        "include": {
+          "_tier_preference": "data_content"
+        }
+      }
+    },
+    "search": {
+      "slowlog": {
+        "level": "info",
+        "threshold": {
+          "fetch": {
+            "warn": "200ms",
+            "trace": "50ms",
+            "debug": "80ms",
+            "info": "100ms"
+          },
+          "query": {
+            "warn": "500ms",
+            "trace": "50ms",
+            "debug": "100ms",
+            "info": "200ms"
+          }
+        }
+      }
+    },
+    "refresh_interval": "1s",
+    "indexing": {
+      "slowlog": {
+        "level": "info",
+        "threshold": {
+          "index": {
+            "warn": "200ms",
+            "trace": "20ms",
+            "debug": "50ms",
+            "info": "100ms"
+          }
+        },
+        "source": "1000"
+      }
+    }
+  }
+}

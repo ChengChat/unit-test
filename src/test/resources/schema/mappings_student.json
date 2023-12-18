@@ -1,0 +1,24 @@
+{
+  "dynamic": "true",
+  "properties": {
+    "id": {
+      "type": "keyword"
+    },
+    "firstName": {
+      "type": "keyword"
+    },
+    "lastName": {
+      "type": "keyword"
+    },
+    "introduce": {
+      "type": "text"
+    },
+    "email": {
+      "type": "keyword"
+    },
+    "createTime": {
+      "type": "date",
+      "format": "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    }
+  }
+}
