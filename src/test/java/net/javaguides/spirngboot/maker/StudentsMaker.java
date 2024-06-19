@@ -1,13 +1,14 @@
 package net.javaguides.spirngboot.maker;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import net.javaguides.spirngboot.entity.Student;
 
 public class StudentsMaker {
 
-  public static Student buildStudentsMaker() {
+  public static Student buildStudentsMaker(long id) {
     return Student.builder()
-        .id(1L)
+        .id(id)
         .createTime(OffsetDateTime.now())
         .email("aa@qq.com")
         .firstName("zhang")
@@ -15,6 +16,7 @@ public class StudentsMaker {
         .gender(1)
         .belongClass(1)
         .introduce("我叫张三，今年22岁，性别男")
+        .amount(new BigDecimal("10000.123"))
         .build();
   }
 

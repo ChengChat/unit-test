@@ -3,6 +3,7 @@ package net.javaguides.spirngboot.entity;
 import static org.springframework.data.elasticsearch.annotations.FieldType.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Jacksonized
 @Data
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -43,6 +44,7 @@ public class Student {
     @Column(name = "belong_class")
     private Integer belongClass;
     private String email;
+    private BigDecimal amount;
     @Field(type = Date, format = DateFormat.custom, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private OffsetDateTime createTime;
 }

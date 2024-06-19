@@ -13,20 +13,14 @@ import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.kafka.core.KafkaOperations;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
-
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static net.javaguides.spirngboot.listener.TradeMatchListener.MSG_TOPIC;
-import static net.javaguides.spirngboot.util.JsonUtil.fromJson;
 import static net.javaguides.spirngboot.util.JsonUtil.toJson;
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.waitAtMost;
@@ -71,7 +65,7 @@ public class TradeMatchListenerTest {
 
   @Test
   public void onSaveStudent() {
-    kafkaTemplate.send(MSG_TOPIC, toJson(StudentsMaker.buildStudentsMaker()));
+    kafkaTemplate.send(MSG_TOPIC, toJson(StudentsMaker.buildStudentsMaker(1L)));
 
     waitAtMost(5, SECONDS).untilAsserted(
         () -> verify(studentService).save(any()));

@@ -5,13 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termsQuery;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.waitAtMost;
 
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import net.javaguides.spirngboot.entity.Student;
 import net.javaguides.spirngboot.maker.StudentsMaker;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -43,7 +41,7 @@ public class ElasticSearchNewsRepositoryTest extends ElasticSearchRepositoryTest
 
   private static final String INDEX_NAME = "i_product";
   private final IndexCoordinates index = IndexCoordinates.of(INDEX_NAME);
-  private final List<Student> students = Lists.newArrayList(StudentsMaker.buildStudentsMaker(),
+  private final List<Student> students = Lists.newArrayList(StudentsMaker.buildStudentsMaker(1L),
       StudentsMaker.buildStudentsMaker2(),
       StudentsMaker.buildStudentsMaker3(),
       StudentsMaker.buildStudentsMaker4()

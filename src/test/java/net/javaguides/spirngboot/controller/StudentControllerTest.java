@@ -1,9 +1,7 @@
 package net.javaguides.spirngboot.controller;
 
-import static java.util.Collections.singletonList;
 import static net.javaguides.spirngboot.maker.StudentsMaker.buildStudentsMaker;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -17,11 +15,9 @@ import com.google.common.collect.Lists;
 import net.javaguides.spirngboot.entity.Student;
 import net.javaguides.spirngboot.service.StudentService;
 import net.javaguides.spirngboot.util.JsonUtil;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -41,7 +37,7 @@ class StudentControllerTest {
 
   @Test
   void createStudent() throws Exception {
-    Student student = buildStudentsMaker();
+    Student student = buildStudentsMaker(1L);
     when(studentService.save(any())).thenReturn(student);
 
     mockMvc.perform(post("/api/students")
@@ -57,7 +53,7 @@ class StudentControllerTest {
 
   @Test
   void getAllStudents() throws Exception {
-    Student student = buildStudentsMaker();
+    Student student = buildStudentsMaker(1L);
     when(studentService.findAll()).thenReturn(Lists.newArrayList(student));
 
     mockMvc.perform(get("/api/students")

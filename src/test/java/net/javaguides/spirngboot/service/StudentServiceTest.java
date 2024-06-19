@@ -6,21 +6,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.Lists;
+import java.math.BigDecimal;
+import java.util.List;
 import net.javaguides.spirngboot.entity.Student;
 import net.javaguides.spirngboot.maker.StudentsMaker;
 import net.javaguides.spirngboot.repository.StudentRepository;
 import net.javaguides.spirngboot.service.impl.StudentServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 /**
  * 利用spring bean
@@ -39,9 +37,10 @@ public class StudentServiceTest {
   @Test
   public void save() {
     ArgumentCaptor<Student> argumentCaptor = ArgumentCaptor.forClass(Student.class);
-    when(studentRepository.save(argumentCaptor.capture())).thenReturn(StudentsMaker.buildStudentsMaker());
+    when(studentRepository.save(argumentCaptor.capture())).thenReturn(
+        StudentsMaker.buildStudentsMaker(1L));
 
-    Student save = studentService.save(StudentsMaker.buildStudentsMaker());
+    Student save = studentService.save(StudentsMaker.buildStudentsMaker(1L));
 
     assertThat(save).isNotNull();
     verify(studentRepository).save(any());
@@ -52,11 +51,16 @@ public class StudentServiceTest {
 
   @Test
   public void findAll() {
-    when(studentRepository.findAll()).thenReturn(Lists.newArrayList(StudentsMaker.buildStudentsMaker()));
+    List<Student> students = Lists.newArrayList(StudentsMaker.buildStudentsMaker(1L),
+        StudentsMaker.buildStudentsMaker(2L));
+    when(studentRepository.findAll()).thenReturn(students);
 
     List<Student> studentList = studentService.findAll();
 
     assertThat(studentList).isNotNull();
-    assertThat(studentList.size()).isEqualTo(1);
+    assertThat(studentList.size()).isEqualTo(2);
+    assertThat(studentList)
+        .usingComparatorForType(BigDecimal::compareTo, BigDecimal.class)
+        .containsExactlyInAnyOrder(students.toArray(new Student[]{}));
   }
 }
