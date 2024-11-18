@@ -4,7 +4,10 @@ spring:
       ddl-auto: none
     show-sql: true
     generate-ddl: false
-
-logging:
+  kafka:
+    consumer:
+      group-id: unit
   level:
     root: info
+
+
