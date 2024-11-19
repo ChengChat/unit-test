@@ -52,6 +52,7 @@ public class StudentClientTest {
   private MockMvc mockMvc;
 
 
+
   @BeforeClass
   public static void setUp() {
     System.setProperty("ping-service.ribbon.listOfServers",
