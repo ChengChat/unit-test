@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "${student.service.name}", path = "/remote", contextId = "student-client")
 public interface StudentClient {
 
+
   @GetMapping("/students/{studentId}")
   Response<Student> getValues(@PathVariable("studentId") Long studentId);
 }
