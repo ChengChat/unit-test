@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.google.common.collect.Lists;
 import net.javaguides.springboot.entity.Student;
+import net.javaguides.springboot.remoteCall.StudentClient;
 import net.javaguides.springboot.service.StudentService;
 import net.javaguides.springboot.util.JsonUtil;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(StudentController.class)
-//@ImportAutoConfiguration({WingWebAutoConfiguration.class, WebEnumConfig.class})
 class StudentControllerTest {
 
   @Autowired
@@ -34,6 +34,8 @@ class StudentControllerTest {
   @MockBean
   private StudentService studentService;
 
+  @MockBean
+  private StudentClient studentClient;
 
   @Test
   void createStudent() throws Exception {

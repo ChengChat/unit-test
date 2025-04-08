@@ -2,6 +2,7 @@ package net.javaguides.springboot.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -47,6 +48,24 @@ public class StudentServiceTest {
     Student value = argumentCaptor.getValue();
     assertThat(value).isNotNull();
     assertThat(value.getId()).isEqualTo(1);
+  }
+
+  @Test
+  public void saveWhenArgThat() {
+    when(studentRepository.save(assertStudent())).thenReturn(
+        StudentsMaker.buildStudentsMaker(1L));
+
+    Student save = studentService.save(StudentsMaker.buildStudentsMaker(1L));
+
+    assertThat(save).isNotNull();
+    verify(studentRepository).save(assertStudent());
+  }
+
+  private static Student assertStudent() {
+    return argThat(student -> {
+      assertThat(student.getId()).isEqualTo(1);
+      return true;
+    });
   }
 
   @Test

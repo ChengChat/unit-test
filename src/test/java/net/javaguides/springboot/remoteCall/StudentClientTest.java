@@ -14,7 +14,7 @@ import static wiremock.com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static wiremock.org.apache.http.HttpStatus.SC_OK;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import net.javaguides.springboot.TestApplication;
+import net.javaguides.springboot.UnitTestApplication;
 import net.javaguides.springboot.common.Response;
 import net.javaguides.springboot.entity.Student;
 import net.javaguides.springboot.util.JsonUtil;
@@ -34,7 +34,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = TestApplication.class)
+@SpringBootTest(classes = UnitTestApplication.class)
 @TestPropertySource(
     properties = {
         "student.service.name=ping-service",

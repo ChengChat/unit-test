@@ -6,6 +6,7 @@ CREATE TABLE `students`(
     `introduce` text NOT NULL DEFAULT '' COMMENT '个人介绍',
     `gender` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '性别',
     `belong_class` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '班级',
+    `amount`      decimal(18, 4) NOT NULL COMMENT '资金',
     `create_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
     `update_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
     PRIMARY KEY (`id`)
